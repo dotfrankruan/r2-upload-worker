@@ -27,7 +27,10 @@ export default {
         httpMetadata: { contentType: file.type },
       });
 
-      return new Response(`File ${fileName} uploaded successfully!`);
+      const baseUrl = 'https://static.frank-ruan.com';
+      const fileUrl = `${baseUrl}/${fileName}`;
+
+      return new Response(`File uploaded successfully! <a href="${fileUrl}" target="_blank">${fileUrl}</a>`);
     }
 
     if (url.pathname === '/') {
@@ -226,9 +229,9 @@ const html = `
         });
 
         const result = await response.text();
-        statusDiv.textContent = result;
+        statusDiv.innerHTML = result;
       } catch (error) {
-        statusDiv.textContent = 'Upload failed: ' + error.message;
+        statusDiv.innerHTML = 'Upload failed: ' + error.message;
       }
     });
   </script>
