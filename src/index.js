@@ -21,7 +21,7 @@ export default {
       const day = date.getDate().toString().padStart(2, '0');
       const randomString = crypto.randomUUID();
       const fileExtension = file.name.split('.').pop();
-      const fileName = `${year}${month}${day}_${randomString}.${fileExtension}`;
+      const fileName = `workers_uploaded/${year}${month}${day}_${randomString}.${fileExtension}`;
 
       await env.MY_BUCKET.put(fileName, file.stream(), {
         httpMetadata: { contentType: file.type },
