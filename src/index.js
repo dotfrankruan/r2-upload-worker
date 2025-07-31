@@ -56,20 +56,87 @@ const html = `
       darkMode: 'class',
     }
   </script>
+  <style>
+    :root {
+      --bg-light: #f0f2f5;
+      --card-bg-light: #ffffff;
+      --text-primary-light: #1f2937;
+      --text-secondary-light: #4b5563;
+      --input-border-light: #e0e0e0;
+      --button-primary-bg-light: #5856d6;
+      --button-primary-hover-bg-light: #3d3ca7;
+
+      --bg-dark: #1c1c1e;
+      --card-bg-dark: #2c2c2e;
+      --text-primary-dark: #f2f2f7;
+      --text-secondary-dark: #aeaeb2;
+      --input-border-dark: #48484a;
+      --button-primary-bg-dark: #5e5ce6;
+      --button-primary-hover-bg-dark: #4947d1;
+    }
+    body {
+      background-color: var(--bg-light);
+      transition: background-color 0.3s ease;
+    }
+    .dark body {
+      background-color: var(--bg-dark);
+    }
+    .card {
+      background-color: var(--card-bg-light);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .dark .card {
+      background-color: var(--card-bg-dark);
+    }
+    .text-primary {
+      color: var(--text-primary-light);
+      transition: color 0.3s ease;
+    }
+    .dark .text-primary {
+      color: var(--text-primary-dark);
+    }
+    .text-secondary {
+      color: var(--text-secondary-light);
+      transition: color 0.3s ease;
+    }
+    .dark .text-secondary {
+      color: var(--text-secondary-dark);
+    }
+    .upload-button {
+      background-color: var(--button-primary-bg-light);
+      transition: background-color 0.3s ease;
+    }
+    .dark .upload-button {
+      background-color: var(--button-primary-bg-dark);
+    }
+    .upload-button:hover {
+      background-color: var(--button-primary-hover-bg-light);
+    }
+    .dark .upload-button:hover {
+      background-color: var(--button-primary-hover-bg-dark);
+    }
+    .drop-zone {
+      border-color: var(--input-border-light);
+      transition: border-color 0.3s ease;
+    }
+    .dark .drop-zone {
+      border-color: var(--input-border-dark);
+    }
+  </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center h-screen">
+<body class="flex items-center justify-center h-screen">
   <div class="absolute top-4 right-4">
     <button id="theme-toggle" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
       <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
       <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 5.05A1 1 0 003.636 6.464l.707.707a1 1 0 001.414-1.414l-.707-.707zM3 11a1 1 0 100-2H2a1 1 0 100 2h1zM6.464 14.364a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707z"></path></svg>
     </button>
   </div>
-  <div class="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-    <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white">Upload a File to R2</h2>
+  <div class="card w-full max-w-md p-8 space-y-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-center text-primary">Upload a File to R2</h2>
     <form id="upload-form" class="space-y-6">
       <div>
-        <label for="file-upload" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Choose file</label>
-        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-md">
+        <label for="file-upload" class="block text-sm font-medium text-secondary">Choose file</label>
+        <div class="drop-zone mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md">
           <div class="space-y-1 text-center">
             <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
               <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -86,12 +153,12 @@ const html = `
         </div>
       </div>
       <div>
-        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <button type="submit" class="upload-button w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           Upload
         </button>
       </div>
     </form>
-    <div id="status" class="text-center text-gray-700 dark:text-gray-300"></div>
+    <div id="status" class="text-center text-secondary"></div>
   </div>
   <script>
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
